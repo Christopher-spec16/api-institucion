@@ -71,9 +71,9 @@ export default function UsersCreate() {
               </label>
               <select
                 onChange={(e) => setTipoDocumento(e.target.value)}
-                defaultValue="CC"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
+                <option value="">Seleccione</option>
                 <option value="CC">Cédula de Ciudadanía (CC)</option>
                 <option value="CE">Cédula de Extranjería (CE)</option>
                 <option value="TI">Tarjeta de Identidad (TI)</option>
@@ -124,7 +124,6 @@ export default function UsersCreate() {
               <input
                 onChange={(e) => setFechaNacimiento(e.target.value)}
                 type="date"
-                defaultValue="2002-01-01"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               />
             </div>
@@ -138,6 +137,7 @@ export default function UsersCreate() {
                 defaultValue="Masculino"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
+                <option value="">Seleccione</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
                 <option value="Otro">Otro / Prefiero no decir</option>
@@ -181,9 +181,9 @@ export default function UsersCreate() {
               </label>
               <select
                 onChange={(e) => setCiudad(e.target.value)}
-                defaultValue="Bogotá"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
+                <option value="">Seleccione</option>
                 <option value="Bogotá">Bogotá D.C.</option>
                 <option value="Medellín">Medellín</option>
                 <option value="Cali">Cali</option>
@@ -217,9 +217,9 @@ export default function UsersCreate() {
               </label>
               <select
                 onChange={(e) => setCarrera(e.target.value)}
-                defaultValue="Ingeniería de Sistemas"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
+                <option value="">Seleccione</option>
                 <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
                 <option value="Ciencia de Datos">Ciencia de Datos</option>
                 <option value="Diseño Digital y Multimedia">Diseño Digital y Multimedia</option>
@@ -232,9 +232,9 @@ export default function UsersCreate() {
               </label>
               <select
                 onChange={(e) => setSemestre(e.target.value)}
-                defaultValue="1"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
+                <option value="">Seleccione</option>
                 <option value="1">Semestre 1</option>
                 <option value="2">Semestre 2</option>
                 <option value="3">Semestre 3</option>
@@ -252,9 +252,9 @@ export default function UsersCreate() {
               </label>
               <select
                 onChange={(e) => setEstado(e.target.value)}
-                defaultValue="Activo"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
+                <option value="">Seleccione</option>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
               </select>
