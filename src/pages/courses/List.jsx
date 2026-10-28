@@ -1,73 +1,17 @@
 import { Link } from 'react-router-dom';
+import { getData } from '../../api/services';
+import { end_points } from '../../api/config';
+import { useState, useEffect } from 'react';
 
-const CURSOS_STATIC = [
-  {
-    id: "1",
-    codigo: "SIS-301",
-    titulo: "Desarrollo Web Full Stack con Node.js y React",
-    descripcion: "Diseño y construcción de aplicaciones web empresariales, arquitecturas cliente-servidor y servicios web modernos.",
-    departamento: "Ingeniería de Software",
-    modalidad: "Virtual",
-    duracionHoras: 80,
-    creditos: 4,
-    precio: 450000,
-    instructor: "Ing. Fernando Herrera",
-    emailInstructor: "f.herrera@universidad.edu.co",
-    cupoMaximo: 25,
-    horario: "Martes y Jueves 18:00 - 20:00",
-    estado: "Abierto"
-  },
-  {
-    id: "2",
-    codigo: "DAT-402",
-    titulo: "Ciencia de Datos y Machine Learning Aplicado",
-    descripcion: "Análisis estadístico, modelos predictivos supervisados y no supervisados con Python, Pandas y Scikit-Learn.",
-    departamento: "Inteligencia Artificial",
-    modalidad: "Híbrida",
-    duracionHoras: 90,
-    creditos: 5,
-    precio: 520000,
-    instructor: "Dra. Carolina Montoya",
-    emailInstructor: "c.montoya@universidad.edu.co",
-    cupoMaximo: 20,
-    horario: "Lunes y Miércoles 18:00 - 20:30",
-    estado: "Abierto"
-  },
-  {
-    id: "3",
-    codigo: "DSG-201",
-    titulo: "Diseño de Experiencia de Usuario (UX/UI) y Prototipado",
-    descripcion: "Principios de usabilidad, diseño centrado en el usuario, Design Thinking y prototipado de alta fidelidad en Figma.",
-    departamento: "Diseño Digital",
-    modalidad: "Virtual",
-    duracionHoras: 60,
-    creditos: 3,
-    precio: 380000,
-    instructor: "Lic. Marcela Ríos",
-    emailInstructor: "m.rios@universidad.edu.co",
-    cupoMaximo: 25,
-    horario: "Sábados 08:00 - 13:00",
-    estado: "Abierto"
-  },
-  {
-    id: "4",
-    codigo: "SEC-501",
-    titulo: "Seguridad Ofensiva y Auditoría de Redes",
-    descripcion: "Metodologías de Ethical Hacking, escaneo y explotación de vulnerabilidades y seguridad en protocolos de red.",
-    departamento: "Ciberseguridad",
-    modalidad: "Presencial",
-    duracionHoras: 75,
-    creditos: 4,
-    precio: 490000,
-    instructor: "Mg. Camilo Restrepo",
-    emailInstructor: "c.restrepo@universidad.edu.co",
-    cupoMaximo: 20,
-    horario: "Viernes 17:00 - 21:00",
-    estado: "Abierto"
-  }
-];
 
 export default function CoursesList() {
+
+  const [cursos, setCursos] = useState([])
+  useEffect(() => {
+    getData(end_points.cursos)
+      .then((data) => setCursos(data))
+  }, [])
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -166,7 +110,7 @@ export default function CoursesList() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {CURSOS_STATIC.map((curso) => (
+        {cursos.map((curso) => (
           <div
             key={curso.id}
             className="bg-white rounded-xl border border-slate-200 p-6 flex flex-col justify-between hover:border-slate-300 transition-colors"

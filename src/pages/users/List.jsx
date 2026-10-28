@@ -20,7 +20,7 @@ export default function UsersList() {
           </p>
         </div>
         <Link
-          to="/estudiantes/nuevo"
+          to="nuevo"
           className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-xs transition-colors"
         >
           <span className="mr-1.5 text-base leading-none font-bold">+</span>

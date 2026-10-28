@@ -6,8 +6,13 @@ export function getData(endpoint) {
         .catch((error) => console.log(error))
 }
 
-export function createData() {
-    fetch()
+export function createData(end_points, data) {
+    return fetch(end_points, {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+        .then((response) => response.json())
+        .catch((error) => console.log(error))
 }
 
 export function updateData() {
