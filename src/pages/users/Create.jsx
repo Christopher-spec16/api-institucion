@@ -1,6 +1,41 @@
 import { Link } from 'react-router-dom';
+import { getData, createData } from '../../api/services';
+import { end_points } from '../../api/config';
+import { useState, useEffect } from 'react';
+import { buscarItem } from '../../utils/helpers';
 
 export default function UsersCreate() {
+  const [estudiantes, setEstudiantes] = useState([])
+  const [nombre, setNombre] = useState("")
+  const [apellido, setApellido] = useState("")
+  const [tipoDocumento, setTipoDocumento] = useState("")
+  const [numeroDocumento, setNumeroDocumento] = useState("")
+  const [email, setEmail] = useState("")
+  const [telefono, setTelefono] = useState("")
+  const [fechaNacimiento, setFechaNacimiento] = useState("")
+  const [genero, setGenero] = useState("")
+  const [ciudad, setCiudad] = useState("")
+  const [direccion, setDireccion] = useState("")
+  const [semestre, setSemestre] = useState("")
+  const [carrera, setCarrera] = useState("")
+  const [estado, setEstado] = useState("")
+  useEffect(() => {
+    getData(end_points.estudiantes)
+      .then((data) => setEstudiantes(data))
+  }, [])
+
+  let user = buscarItem(estudiantes, numeroDocumento, email)
+
+  function registrarEstudiante() {
+    let estudiante = { nombre, tipoDocumento, numeroDocumento, apellido, telefono, fechaNacimiento, genero, ciudad, direccion, semestre, carrera, estado, email }
+    if (user) {
+      alert("El Usuario ya existe en la base de datos")
+    } else {
+      createData(end_points.estudiantes, estudiante)
+        .then((data) => console.log(data))
+    }
+  }
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center space-x-2 text-xs text-slate-500">
@@ -24,7 +59,7 @@ export default function UsersCreate() {
         </Link>
       </div>
 
-      <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+      <form className="space-y-6">
         <div className="bg-white p-6 rounded-xl border border-slate-200 space-y-4">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-700 border-b border-slate-100 pb-2">
             1. Datos de Identificación
@@ -35,6 +70,7 @@ export default function UsersCreate() {
                 Tipo de Documento
               </label>
               <select
+                onChange={(e) => setTipoDocumento(e.target.value)}
                 defaultValue="CC"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
@@ -50,6 +86,7 @@ export default function UsersCreate() {
                 Número de Documento
               </label>
               <input
+                onChange={(e) => setNumeroDocumento(e.target.value)}
                 type="text"
                 placeholder="Ej. 1024589632"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-blue-500"
@@ -61,6 +98,7 @@ export default function UsersCreate() {
                 Nombres
               </label>
               <input
+                onChange={(e) => setNombre(e.target.value)}
                 type="text"
                 placeholder="Ej. Carlos Andrés"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-blue-500"
@@ -72,6 +110,7 @@ export default function UsersCreate() {
                 Apellidos
               </label>
               <input
+                onChange={(e) => setApellido(e.target.value)}
                 type="text"
                 placeholder="Ej. Mendoza Gómez"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-blue-500"
@@ -83,6 +122,7 @@ export default function UsersCreate() {
                 Fecha de Nacimiento
               </label>
               <input
+                onChange={(e) => setFechaNacimiento(e.target.value)}
                 type="date"
                 defaultValue="2002-01-01"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
@@ -94,6 +134,7 @@ export default function UsersCreate() {
                 Género
               </label>
               <select
+                onChange={(e) => setGenero(e.target.value)}
                 defaultValue="Masculino"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
@@ -115,6 +156,7 @@ export default function UsersCreate() {
                 Correo Electrónico Institucional / Personal
               </label>
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="estudiante@universidad.edu.co"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-blue-500"
@@ -126,6 +168,7 @@ export default function UsersCreate() {
                 Teléfono de Contacto
               </label>
               <input
+                onChange={(e) => setTelefono(e.target.value)}
                 type="tel"
                 placeholder="+57 300 000 0000"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-blue-500"
@@ -137,6 +180,7 @@ export default function UsersCreate() {
                 Ciudad de Residencia
               </label>
               <select
+                onChange={(e) => setCiudad(e.target.value)}
                 defaultValue="Bogotá"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
@@ -153,6 +197,7 @@ export default function UsersCreate() {
                 Dirección Residencial
               </label>
               <input
+                onChange={(e) => setDireccion(e.target.value)}
                 type="text"
                 placeholder="Calle, Carrera, Barrio y Apto"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-blue-500"
@@ -171,6 +216,7 @@ export default function UsersCreate() {
                 Programa / Carrera
               </label>
               <select
+                onChange={(e) => setCarrera(e.target.value)}
                 defaultValue="Ingeniería de Sistemas"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
@@ -185,6 +231,7 @@ export default function UsersCreate() {
                 Semestre de Ingreso
               </label>
               <select
+                onChange={(e) => setSemestre(e.target.value)}
                 defaultValue="1"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
@@ -204,6 +251,7 @@ export default function UsersCreate() {
                 Estado Inicial
               </label>
               <select
+                onChange={(e) => setEstado(e.target.value)}
                 defaultValue="Activo"
                 className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg text-slate-800 focus:outline-hidden focus:border-blue-500"
               >
@@ -222,7 +270,8 @@ export default function UsersCreate() {
             Cancelar
           </Link>
           <button
-            type="submit"
+            onClick={registrarEstudiante}
+            type="button"
             className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs transition-colors"
           >
             Guardar Estudiante
